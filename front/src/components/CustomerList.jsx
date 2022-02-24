@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import CustomerDetails from "./CustomerDetails";
+import { Link } from "react-router-dom"
 
 function CustomerList() {
     const [customers, setCustomers] = useState([])
@@ -12,7 +13,9 @@ function CustomerList() {
 
     return (
         <div>
-            <button>Add new cutomer</button>
+            <Link to="/customers/create">
+                <button>Add new cutomer</button>
+            </Link>
             <ul>
                 {customers.map(customer => <CustomerDetails key={customer.id} customer={customer} />)}
             </ul>
