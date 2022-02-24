@@ -1,11 +1,20 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { create } from "../services/customer.service";
 
 function FormCustomer() {
     const [customer, setCustomer] = useState({})
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("Submit event")
+
+        try {
+            await create(customer)
+            await navigate('/')
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const handleChange = ({ currentTarget }) => {
@@ -15,7 +24,6 @@ function FormCustomer() {
             ...customer,
             [name]: value
         })
-
     }
 
     return (

@@ -1,15 +1,23 @@
 import { useState, useEffect } from "react";
 import CustomerDetails from "./CustomerDetails";
 import { Link } from "react-router-dom"
+import { findAll } from "../services/customer.service";
 
 function CustomerList() {
     const [customers, setCustomers] = useState([])
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/customers')
-            .then(res => res.json())
-            .then(data => setCustomers(data["hydra:member"]))
+        fetAllCustomers()
     }, [])
+
+    const fetAllCustomers = async () => {
+        try {
+            const data = await findAll()
+            setCustomers(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div>

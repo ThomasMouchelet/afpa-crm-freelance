@@ -17,7 +17,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
                 'read:customer:item'
             ]]
         ]
-    ]
+    ],
+    order: ["id" => "DESC"]
 )]
 class Customer
 {
